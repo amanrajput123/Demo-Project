@@ -8,12 +8,13 @@ import {
   MenuItems,
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Link } from 'react-router-dom';
 
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
+  { name: "Home", href: "/", current: true },
+  { name: "About Us", href: "/about-us", current: false },
+  { name: "Our Projects", href: "/our-projects", current: false },
+  { name: "Contact Us", href: "/contact-us", current: false },
 ];
 
 function classNames(...classes) {
@@ -44,9 +45,9 @@ export default function Navbar() {
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
-                    href={item.href}
+                    to={item.href}
                     className={classNames(
                       item.current
                         ? "bg-gray-900 text-white"
@@ -56,7 +57,7 @@ export default function Navbar() {
                     aria-current={item.current ? "page" : undefined}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -86,32 +87,32 @@ export default function Navbar() {
               <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden">
                 <MenuItem>
                   {({ focus }) => (
-                    <a
-                      href="#"
+                    <Link
+                      to="/profile"
                       className={`block px-4 py-2 text-sm text-gray-700 ${focus ? "bg-gray-100" : ""}`}
                     >
                       Your Profile
-                    </a>
+                    </Link>
                   )}
                 </MenuItem>
                 <MenuItem>
                   {({ focus }) => (
-                    <a
-                      href="#"
+                    <Link
+                      to="/settings"
                       className={`block px-4 py-2 text-sm text-gray-700 ${focus ? "bg-gray-100" : ""}`}
                     >
                       Settings
-                    </a>
+                    </Link>
                   )}
                 </MenuItem>
                 <MenuItem>
                   {({ focus }) => (
-                    <a
-                      href="#"
+                    <Link
+                      to="/logout"
                       className={`block px-4 py-2 text-sm text-gray-700 ${focus ? "bg-gray-100" : ""}`}
                     >
                       Sign out
-                    </a>
+                    </Link>
                   )}
                 </MenuItem>
               </MenuItems>
@@ -120,13 +121,14 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       <DisclosurePanel className="sm:hidden">
         <div className="space-y-1 px-2 pt-2 pb-3">
           {navigation.map((item) => (
             <DisclosureButton
               key={item.name}
-              as="a"
-              href={item.href}
+              as={Link}
+              to={item.href}
               className={classNames(
                 item.current
                   ? "bg-gray-900 text-white"
